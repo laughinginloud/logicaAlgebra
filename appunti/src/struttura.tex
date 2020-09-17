@@ -1,0 +1,96 @@
+% Imposto la radice del documento, utile per Visual Studio Code ed altri editor
+% !TEX root = ../appunti.tex
+
+% Costanti
+\newcommand{\autori}{Mattia Martelli}
+\newcommand{\titolo}{Logica ed Algebra}
+
+% Utilizzo il tipo libro impostato per evitare pagine vuote, utili solo per la stampa
+\documentclass[oneside]{book}
+
+% Imposto lo stile della numerazione della pagina
+\pagestyle{plain}
+
+% Utilizzo il pacchetto per le traduzioni ed imposto la lingua
+\usepackage{polyglossia}
+\setmainlanguage{italian}
+
+% Imposto il margine delle pagine
+\usepackage[margin=1in]{geometry}
+
+% Importo i pacchetti per le immagini con descrizioni, che torneranno utili per le dimostrazioni contenenti disegni
+\usepackage{graphicx,subcaption}
+
+% Importo i pacchetti per disegnare
+\usepackage{tikz,pgfplots}
+
+% Importo i pacchetti per la matematica
+\usepackage{mathtools,amssymb,amsthm,thmtools,cancel}
+
+% Imposto lo stile per l'indice dei teoremi e delle definizioni
+\renewcommand{\listtheoremname}{Indice delle Definizioni e dei Teoremi}
+
+% Imposto i collegamenti
+\usepackage{hyperref}
+\hypersetup{
+    unicode=true,
+    bookmarksnumbered=true,
+    bookmarksopen=false,
+    hidelinks,
+    pdftitle={\titolo},
+    pdfauthor={\autori}
+}
+
+% Importo il pacchetto per lo stile degli elenchi
+\usepackage{enumitem}
+
+% Cambio la numerazione degli elenchi di primo livello in numeri romani maiuscoli
+\renewcommand{\theenumi}{\Roman{enumi}}
+
+% Modifico lo stile delle tabelle
+\usepackage{array,multirow}
+\renewcommand{\arraystretch}{1.3}
+
+% Importo il pacchetto per le frazioni in diagonale
+\usepackage{xfrac}
+
+% Importo il pacchetto per la personalizzazione dei titolo e li modifico
+\usepackage{titlesec}
+\renewcommand{\thechapter}{\Roman{chapter}}
+\titleformat{\chapter}[display]
+    {\bfseries\Large}
+    {\filleft\MakeUppercase{\chaptertitlename} \Huge\thechapter}
+    {4ex}
+    {\titlerule
+     \vspace{2ex}
+     \filright}
+    [\vspace{2ex}
+     \titlerule]
+
+\titleformat{\part}[display]
+     {\centering\normalfont\Huge\bfseries}
+     {\titlerule[5pt]
+      \vspace{3pt}
+      \titlerule[2pt]
+      \vspace{3pt}
+      \MakeUppercase{\partname} \thepart}
+     {0pt}
+     {\titlerule[2pt]
+      \vspace{1pc}
+      \huge
+      \MakeUppercase}
+
+%Cambio la numerazione per le sezioni
+\renewcommand{\thesection}{\Roman{section}}
+
+% Importo il pacchetto per i sottofile
+\usepackage{subfiles}
+
+% Importo il paccheto per racchiudere il testo in riquadri
+\usepackage{framed}
+
+% Imposto le informazioni presenti sulla copertina
+% Nota: date rimuove la propria spaziatura, dato che non deve essere presente
+\title{\titolo}
+\author{\autori}
+\date{\vspace{-5ex}}
