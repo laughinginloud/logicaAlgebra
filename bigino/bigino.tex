@@ -1,0 +1,121 @@
+\documentclass[10pt]{article}
+
+\pagestyle{empty}
+
+\usepackage{mathtools, amssymb}
+
+\usepackage[margin=.2in]{geometry}
+
+\renewcommand{\arraystretch}{1.2}
+
+\newcommand{\inv}[1]{{#1}^{-1}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\oldemptyset}{\emptyset}
+\renewcommand{\emptyset}{\varnothing}
+
+\begin{document}
+
+    \subsection*{Relazioni e funzioni}
+
+        Dati \(n\) insiemi \(A_n\), una relazione \(R\) di arità \(n\) è un insieme nella forma
+        \[
+            R \coloneqq \left\{(a_1, \, a_2, \, \ldots, \, a_n) \; | \; a_i \in A_i, \, i = 1, \, 2, \, \ldots, \, n\right\}.
+        \]
+        Dunque, \(R \subseteq A_a \times A_2 \times \ldots \times A_n\).
+        Poiché sono insiemi, valgono le usuali operazioni (\(\subset, \, \subseteq, \, =, \, \cap, \, \cup\)).
+        Proprietà:
+
+        \begin{table}[h]
+            \centering
+
+            \begin{tabular}{|| c | c | c ||}
+                \hline
+                Proprietà & \(\cap\) & \(\cup\)\\
+                \hline\hline
+                Idempotenza & \(R \cap R = R\) & \(R \cup R = R\)\\
+                \hline
+                Commutatività & \(R \cap S = S \cap R\) & \(R \cup S = S \cup R\)\\
+                \hline
+                Associatività & \((R \cap S) \cap T = R \cap (S \cap T)\) & \((R \cup S) \cup T = R \cup (S \cup T)\)\\
+                \hline
+                Distributività & \(R \cap (S \cup T) = (R \cap S) \cup (R \cap T)\) & \(R \cup (S \cap T) = (R \cup S) \cap (R \cup T)\)\\
+                \hline
+            \end{tabular}
+        \end{table}
+
+        Il prodotto tra due relazioni \(R \subseteq A_1 \times A_2\) e \(S \subseteq A_2 \times A_3\) è definito come
+        \[
+            R \cdot S \coloneqq \left\{(a_1, \, a_3) \; | \; \exists \; a_2 \in A_2 \, : (a_1, \, a_2) \in R \land (a_2, \, a_3) \in S\right\}.
+        \]
+        Il prodotto tra relazioni è associativo, compatibile con l'inclusione (\(R \subseteq T \subseteq A_1 \times A_2 \, \land \,
+        S \subseteq V \subseteq A_2 \times A_3 \implies R \cdot S \subseteq T \cdot V \)), ma non è commutativo.
+
+        Relazione inversa: \(\inv{R} \coloneqq \left\{(a_2, \, a_1) \; | \; (a_1, \, a_2) \in R\right\}\).
+        Proprietà:
+        \begin{itemize}
+            \item \(\inv{(R \cap S)} = \inv{R} \cap \inv{S}\),
+            \item \(\inv{(R \cup S)} = \inv{R} \cup \inv{S}\),
+            \item \(R \cdot (S \cap T) = (R \cdot S) \cap (R \cdot T)\),
+            \item \(R \cdot (S \cup T) = (R \cdot S) \cup (R \cdot T)\),
+            \item \(\inv{(R \cdot S)} = \inv{S} \cdot \inv{R}\),
+            \item \(R \subseteq S \implies \inv{R} \subseteq \inv{S}\).
+        \end{itemize}
+
+        La potenza di una relazione binaria \(R \subseteq A \times A\) è definita come
+        \[
+            R^{n} \coloneqq
+            \begin{cases*}
+                I_A & \text{se} n = 0\\
+                R \cdot R^{n - 1} & \text{se} n > 0
+            \end{cases*}
+            \qquad \text{dove } n \in \N.
+        \]
+
+        La restrizione \(B \subseteq A\) di una relazione \(R \subseteq A \times A\) è definita come
+        \[
+            R|_B \coloneqq R \cap (B \times B).
+        \]
+        Proprietà:
+        \begin{itemize}
+            \item \(R|_\emptyset = \emptyset\),
+            \item \(R|_B \cup R|_C \subseteq R|_{B \cup C}\),
+            \item \(R|_B \cap R|_C = R|_{B \cap C}\).
+        \end{itemize}
+
+        Proprietà di una relazione binaria \(R \subseteq A \times A\):
+        \begin{description}
+            \item[Serialità] \(\forall \, a \in A, \, \exists \, a' \; | \; (a, \, a') \in R\);
+            \item[Riflessività] \(\forall \, a \in A, \, (a, \, a) \in R\),
+            \item[Simmetria] \(\forall \, (a, \, a') \in R, \, (a', \, a) \in R\),
+            \item[Antisimmetria] \(\forall \, a, \, a' \in A, \, (a, \, a') \in R \land (a', \, a) \in R \implies a = a'\),
+            \item[Transitività] \(\forall \, (a, \, a'), \, (a', \, a'') \in R, \, (a, \, a'') \in R\).
+        \end{description}
+    
+    \subsection*{Strutture algebriche}
+
+        \begin{description}
+            
+            \item[Semigruppo] Una struttura algebrica nella forma \((A, +)\), dove \(+\) è un'operazione associativa sull'insieme \(A\);
+            \item[Semigruppo commutativo] Un semigruppo con l'aggiunta della proprietà commutativa. 
+            \item[Monoide] Un semigruppo con l'aggiunta di un'elemento neutro (scrittura: \((A, +, u)\));
+            \item[Gruppo] Un monoide che presenta l'inverso per ogni elemento dell'insieme;
+            \item[Gruppo abeliano] Un gruppo che presenta la proprietà commutativa.
+            \item[Anello] Una struttura nella forma \((A, +, *, u)\), dove
+                \begin{itemize}
+                    \item \((A, +, u)\) forma un gruppo abeliano;
+                    \item \((A, *)\) forma un semigruppo;
+                    \item \(*\) è distributiva rispetto a \(+\);
+                \end{itemize}
+            \item[Anello con unità] Un anello con un monoide al posto del semigruppo;
+            \item[Anello commutativo] Un anello dove il semigruppo è commutativo;
+            \item[Corpo] Un anello dove \((A \backslash \{u\}, *)\) forma un gruppo;
+            \item[Campo] Un corpo dove \((A \backslash \{u\}, *)\) forma un gruppo abeliano.
+
+        \end{description}
+
+        %pr grp
+        %div 0 an
+        %canc an
+        %sotto
+
+\end{document}
