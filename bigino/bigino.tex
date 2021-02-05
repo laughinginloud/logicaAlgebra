@@ -2,8 +2,7 @@
 
 \pagestyle{empty}
 
-\usepackage{mathtools, amssymb}
-
+\usepackage{mathtools, amssymb, multicol, proof, xparse}
 \usepackage[margin=.2in]{geometry}
 
 \renewcommand{\arraystretch}{1.2}
@@ -15,7 +14,7 @@
 
 \begin{document}
 
-    \subsection*{Relazioni e funzioni}
+    \section*{Relazioni e funzioni}
 
         Dati \(n\) insiemi \(A_n\), una relazione \(R\) di arità \(n\) è un insieme nella forma
         \[
@@ -52,14 +51,25 @@
 
         Relazione inversa: \(\inv{R} \coloneqq \left\{(a_2, \, a_1) \; | \; (a_1, \, a_2) \in R\right\}\).
         Proprietà:
-        \begin{itemize}
-            \item \(\inv{(R \cap S)} = \inv{R} \cap \inv{S}\),
-            \item \(\inv{(R \cup S)} = \inv{R} \cup \inv{S}\),
-            \item \(R \cdot (S \cap T) = (R \cdot S) \cap (R \cdot T)\),
-            \item \(R \cdot (S \cup T) = (R \cdot S) \cup (R \cdot T)\),
-            \item \(\inv{(R \cdot S)} = \inv{S} \cdot \inv{R}\),
-            \item \(R \subseteq S \implies \inv{R} \subseteq \inv{S}\).
-        \end{itemize}
+
+        \medskip
+
+        \begin{minipage}[h]{.5\textwidth}
+            \begin{itemize}
+                \item \(\inv{(R \cap S)} = \inv{R} \cap \inv{S}\),
+                \item \(\inv{(R \cup S)} = \inv{R} \cup \inv{S}\),
+                \item \(R \cdot (S \cap T) = (R \cdot S) \cap (R \cdot T)\),
+            \end{itemize}
+        \end{minipage}
+        \begin{minipage}[h]{.5\textwidth}
+            \begin{itemize}
+                \item \(R \cdot (S \cup T) = (R \cdot S) \cup (R \cdot T)\),
+                \item \(\inv{(R \cdot S)} = \inv{S} \cdot \inv{R}\),
+                \item \(R \subseteq S \implies \inv{R} \subseteq \inv{S}\).
+            \end{itemize}
+        \end{minipage}
+
+        \medskip
 
         La potenza di una relazione binaria \(R \subseteq A \times A\) è definita come
         \[
@@ -72,34 +82,382 @@
         \]
 
         La restrizione \(B \subseteq A\) di una relazione \(R \subseteq A \times A\) è definita come
-        \[
-            R|_B \coloneqq R \cap (B \times B).
-        \]
-        Proprietà:
-        \begin{itemize}
-            \item \(R|_\emptyset = \emptyset\),
-            \item \(R|_B \cup R|_C \subseteq R|_{B \cup C}\),
-            \item \(R|_B \cap R|_C = R|_{B \cap C}\).
-        \end{itemize}
+        \(R|_B \coloneqq R \cap (B \times B)\). Proprietà:
+        \begin{multicols}{3}
+            \begin{itemize}
+                \item \(R|_\emptyset = \emptyset\),
+                \item \(R|_B \cup R|_C \subseteq R|_{B \cup C}\),
+                \item \(R|_B \cap R|_C = R|_{B \cap C}\).
+            \end{itemize}
+        \end{multicols}
 
         Proprietà di una relazione binaria \(R \subseteq A \times A\):
-        \begin{description}
-            \item[Serialità] \(\forall \, a \in A, \, \exists \, a' \; | \; (a, \, a') \in R\);
-            \item[Riflessività] \(\forall \, a \in A, \, (a, \, a) \in R\),
-            \item[Simmetria] \(\forall \, (a, \, a') \in R, \, (a', \, a) \in R\),
-            \item[Antisimmetria] \(\forall \, a, \, a' \in A, \, (a, \, a') \in R \land (a', \, a) \in R \implies a = a'\),
-            \item[Transitività] \(\forall \, (a, \, a'), \, (a', \, a'') \in R, \, (a, \, a'') \in R\).
-        \end{description}
-    
-    \subsection*{Strutture algebriche}
+
+        \medskip
+
+        \begin{minipage}[h]{.4\textwidth}
+            \begin{description}
+                \item[Serialità:] \(\forall \, a \in A, \, \exists \, a' \; | \; (a, \, a') \in R\);
+                \item[Riflessività:] \(\forall \, a \in A, \, (a, \, a) \in R\),
+                \item[Simmetria:] \(\forall \, (a, \, a') \in R, \, (a', \, a) \in R\),
+            \end{description}
+        \end{minipage}
+        \begin{minipage}[h]{.6\textwidth}
+            \begin{description}
+                \item[Antisimmetria:] \(\forall \, a, \, a' \in A, \, (a, \, a') \in R \land (a', \, a) \in R \implies a = a'\),
+                \item[Transitività:] \(\forall \, (a, \, a'), \, (a', \, a'') \in R, \, (a, \, a'') \in R\).
+            \end{description}
+        \end{minipage}
+
+        \medskip
+
+        Dato un insieme di proprietà formali \textbf{P} ed una relazione binaria \(R \subseteq A \times A\), si dice \textbf{P}-chiusura
+        di \(R\) una relazione \(S \subseteq A \times A\) tale che:
+        \begin{itemize}
+            \item \(R \subseteq S\),
+            \item \(S\) gode di tutte le proprietà in \textbf{P},
+            \item se \(T \subseteq A \times A\) gode di tutte le proprietà in \textbf{P} e \(R \subseteq T\) allora \(S \subseteq T\).
+        \end{itemize}
+        
+        Chiusure per \(R \subseteq A \times A\):
+
+        \medskip
+
+        \begin{minipage}[h]{.3\textwidth}
+            \begin{description}
+                \item[Riflessiva:] \(R \cup I_A\);
+                \item[Simmetrica:] \(R \cup \inv{R}\);
+                \item[Transitiva:] \(\bigcup_{n > 0} R^n\);
+            \end{description} 
+        \end{minipage}
+        \begin{minipage}[h]{.7\textwidth}
+            \begin{description}
+                \item[Riflessiva, simmetrica:] \(R \cup I_A \cup \inv{R}\);
+                \item[Riflessiva, transitiva:] \(\bigcup_{n \geqslant 0} R^n\);
+                \item[Equivalenza (riflessiva, simmetrica, transitiva):] \(\bigcup_{n > 0} {(R \cup I_A \cup \inv{R})}^n\).
+            \end{description}
+        \end{minipage}
+
+        \medskip
+
+        Data una relazione di equivalenza \(R\), si dice classe di equivalenza
+        \([a]_R \coloneqq \left\{x \in A \; | \; (a, \, x) \in R\right\}\).
+
+        Dato un insieme \(A\) ed un insieme non vuoto di indici \(I\), si dice partizione di \(A\) una famiglia
+        \(\mathcal{B} \coloneqq \left\{B_i \; | \; i \in I\right\}\) tale che:
+        \begin{multicols}{3}
+            \begin{itemize}
+                \item \(\forall \, i \in I, \, B_i \neq \emptyset\),
+                \item \(A = \bigcup_{i \in I} B_i\) (cioè \(\mathcal{B}\) forma un ricoprimento di \(A\)),
+                \item \(B_i \cap B_j \neq \emptyset \implies B_i = B_j\).
+            \end{itemize}
+        \end{multicols}
+
+        Sia \(R\) una relazione di equivalenza su \(A\), la partizione indotta da \(R\) su \(A\) si chiama insieme quoziente
+        di \(A\) rispetto a \(R\), dunque \(A/R \coloneqq \left\{[a]_R \; | \; a \in A\right\}\).
+
+        \newpage
+
+        \subsection*{Relazioni d'ordine}
+
+            Una relazione \(R\) su \(A\) che goda delle proprietà riflessiva, antisimmetrica e transitiva si dice relazione
+            d'ordine su \(A\). Si indica con \((A, \, \leqslant)\). Se \(\forall \, a, \, b \in A, \, (a, \, b) \in R\), ovvero
+            tutti gli elementi sono confrontabili, la relazione d'ordine è totale. In caso contrario viene detta parziale.
+            Se \(\forall \, a \in A, \, (a, \, a) \notin R\), ovvero la relazione è antiriflessiva, la relazione si dice d'ordine
+            stretto e si indica con \((A, \, <)\).
+
+            \subsubsection*{Minimali e massimali}
+
+                Sia \((A, \, \leqslant)\) un insieme parzialmente ordinato e sia \(m \in A\):
+                \begin{itemize}
+                    \item se \(\forall \, a \in A, \, m \leqslant a\), \(m\) si dice minimo di \(A\);
+                    \item se \(\forall \, a \in A, \, a \leqslant m \implies a = m\), \(m\) si dice minimale di \(A\);
+                    \item se \(\forall \, a \in A, \, a \leqslant m\), \(m\) si dice massimo di \(A\);
+                    \item se \(\forall \, a \in A, \, m \leqslant a \implies a = m\), \(m\) si dice massimale di \(A\).
+                \end{itemize}
+
+                Dato un insieme parzialmente ordinato:
+                \begin{itemize}
+                    \item se presenta un minimo/massimo, esso è unico;
+                    \item se l'insieme è finito e presenta un unico minimale/massimale, esso è il minimo/massimo.
+                \end{itemize}
+
+            \subsubsection*{Maggiornati e minoranti}
+
+                Sia \((A, \, \leqslant)\) un insieme parzialmente ordinato, \(B \subseteq A\) e \(m \in A\):
+                \begin{itemize}
+                    \item se \(\forall \, b \in B, \, m \leqslant b\), \(m\) si dice minorante di \(B\);
+                    \item il massimo rispetto a \(\leqslant\) dei minoranti di \(B\) si dice estremo inferiore di \(B\);
+                    \item se \(\forall \, b \in B, \, b \leqslant m\), \(m\) si dice maggiornate di \(B\);
+                    \item il minimo rispetto a \(\leqslant\) dei maggiornati di \(B\) si dice estremo superiore di \(B\).
+                \end{itemize}
+
+            \subsubsection*{Funzioni}
+
+                Data una relazione \(R \subseteq A \times B\), essa si dice:
+                \begin{itemize}
+                    \item ovunque definita se è seriale rispetto all'insieme \(A\);
+                    \item funzionale se per ogni \(a \in A\) esiste al più un \(b \in B\) con cui è in relazione.
+                \end{itemize}
+                Se una relazione è ovunque definita e funzionale prende il nome di funzione e si indica con \(f : A \to B\). L'insieme
+                \(A\) prende il nome di insieme delle immagini e \(B\) di insieme delle controimmagini.
+
+                Una funzione \(f : A \to B\) è detta iniettiva se \(\forall \, a_1, \, a_2 \in A, \, f(a_1) = f(a_2)\implies a_1 = a_2\).
+                Si dice suriettiva una funzione tale che \(f(A) = B\). Se una funzione è sia iniettiva che suriettiva si dice biiettiva
+                o biunivoca.
+
+                Date due funzioni \(f : A \to B\) e \(g : B \to C\):
+                \begin{itemize}
+                    \item se \(f\) e \(g\) sono iniettive, allora anche \(f \cdot g\) lo è;
+                    \item se \(f \cdot g\) è iniettiva, allora anche \(f\) lo è;
+                    \item se \(f\) e \(g\) sono suriettive, allora anche \(f \cdot g\) lo è;
+                    \item se \(f \cdot g\) è suriettiva, allora anche \(g\) lo è;
+                    \item se \(f\) e \(g\) sono biiettive, allora anche \(f \cdot g\) lo è;
+                    \item se \(f \cdot g\) è biiettiva, allora \(f\) è iniettiva e \(g\) è suriettiva.
+                \end{itemize}
+
+                Data una funzione \(f : A \to B\), si dice funzione inversa la funzione \(g : B \to A\) tale che
+                \(f \cdot g = I_A\) e \(g \cdot f = I_B\). Nel caso sia ammessa solo un'identità, prende il nome di inversa destra
+                o sinistra, rispettivamente.
+
+                Condizione necessaria e sufficiente affinché una funzione ammetta inversa destra è che sia iniettiva. Per quella
+                sinistra, è necessario sia suriettiva. Nel caso sia biiettiva, ammette una ed una sola inversa.
+
+                Si dice nucleo o kernel di una funzione la relazione \(\ker_f \subseteq A \times A\) tale che
+                \(\forall \, (a_1, \, a_2) \in \ker_f, \, f(a_1) = f(a_2)\).
+
+    \section*{Logica proposizionale}
+
+        Alfabeto \(\varepsilon\):
+        \begin{itemize}
+            \item lettere enunciative, indicate con lettere latine maiuscole;
+            \item connettivi logici, composti da \(\neg \,, \, \land, \, \lor, \, \implies, \, \iff\), in questo ordine di precedenza,
+                a partire dal più importante;
+            \item parentesi tonde.
+        \end{itemize}
+        Gli operatori associano a sinistra.
+
+        Si dice formula ben formata un formula \(\varphi \Coloneqq A \; | \; \neg \, \varphi \; | \; \varphi \land \varphi \; | \; \varphi \lor \varphi \; | \; \varphi \implies \varphi \; | \; \varphi \iff \varphi\).
+
+        L'insieme \(S(\varphi)\) delle sottoformule di \(\varphi\) è definito come:
+        \begin{itemize}
+            \item se \(\varphi = A\), \(S(\varphi) = \{\varphi\}\);
+            \item se \(\varphi = \neg \, \psi\), \(S(\varphi) = \{\varphi\} \cup S(\psi)\);
+            \item se \(\varphi = \psi \circ \vartheta\), \(S(\varphi) = {\varphi} \cup S(\psi) \cup S(\vartheta)\).
+        \end{itemize}
+
+        Si dice interpretazione la funzione \(i : \varepsilon \to \{0, \, 1\}\) che agisce sulle singole lettere. Estendendo il concetto
+        alle f.b.f. prende il nome di valutazione ed è definita come:
+        \begin{itemize}
+            \item \(v(A) = i(A)\);
+            \item \(v(\neg \, \varphi) = 1 - v(\varphi)\);
+            \item \(v(\varphi \land \psi) = \min\{v(\varphi), \, v(\psi)\}\);
+            \item \(v(\varphi \lor \psi) = \max\{v(\varphi), \, v(\psi)\}\);
+            \item \(v(\varphi \implies \psi) = \max\{1 - v(\varphi), \, v(\psi)\}\);
+            \item \(v(\varphi \iff \psi) = 1 - \left|v(\varphi) - v(\psi)\right|\).
+        \end{itemize}
+
+        Se \(\varphi\) è una f.b.f. diciamo che una valutazione \(v\) è un suo modello se \(v(\varphi) = 1\). Dunque:
+        \begin{itemize}
+            \item se esiste almeno un modello per \(\varphi\), questa è detta soddisfacibile;
+            \item se ogni valutazione è modello per \(\varphi\), questa è detta tautologia e si indica con \(\models \varphi\);
+            \item se nessuna valutazione è modello per \(\varphi\), questa è detta contraddizione od insoddisfacibile.
+        \end{itemize}
+
+        Sia \(\Gamma\) un insieme di f.b.f., allora:
+        \begin{itemize}
+            \item un modello per \(\Gamma\) è modello \(\forall \, \varphi \in \Gamma\);
+            \item se \(\Gamma\) ammette un modello è detta soddisfacibile;
+            \item se \(\Gamma\) non ammette modelli è detta insoddisfacibile.
+        \end{itemize}
+
+        Se ogni modello di \(\Gamma\) è modello di \(\varphi\) questa è detta conseguenza semantica di \(\Gamma\) e si scrive
+        \(\Gamma \models \varphi\). In caso contrario si scrive \(\Gamma \not\models \varphi\).
+
+        Date \(\varphi, \, \psi \in \Gamma\), \(\Gamma \cup {\psi} \models \varphi\) sse \(\Gamma \models \psi \implies \varphi\).
+        Dunque, \(\psi \models \varphi\) sse \(\models \psi \implies \varphi\) e \(\Gamma \models \varphi\) sse
+        \(\Gamma \cup \{\neg \, \varphi\}\) è insoddisfacibile.
+
+        Due f.b.f con modelli equivalenti si dicono semanticamente equivalenti.
+
+        Leggi (ad eccezione delle defizioni di implicazione doppia e singola, è sempre possibile sostituire \(\land\) e \(\lor\)):
+        \begin{table}[h]
+            \centering
+
+            \begin{tabular}{|| c | c ||}
+                \hline
+                Formula & Nome\\
+                \hline\hline
+                \(A \equiv \neg\neg \, A\) & Doppia negazione\\
+                \hline
+                \(A \land B \equiv B \land A\) & Commutatività\\
+                \hline
+                \(A \land A \equiv A\) & Idempotenza\\
+                \hline
+                \((A \land B) \land C \equiv A \land (B \land C)\) & Associatività\\
+                \hline
+                \(A \land (B \lor C) \equiv (A \land B) \lor (A \land C)\) & Distributività\\
+                \hline
+                \(A \land (A \lor B) \equiv A\) & Assorbimento\\
+                \hline
+                \(\neg \, (A \land B) \equiv \neg \, A \lor \neg \, B\) & De Morgan\\
+                \hline
+                \(A \implies B \equiv \neg \, B \implies \neg \, A\) & Contrapposizione\\
+                \hline
+                \(A \implies B \equiv \neg \, A \lor B\) & Implicazione\\
+                \hline
+                \(A \iff B \equiv (A \implies B) \land (B \implies A)\) & Doppia implicazione\\
+                \hline
+                \((\neg \, A \land A) \lor B \equiv B\) & Non contraddizione\\
+                \hline
+            \end{tabular}
+        \end{table}
+
+        \subsection*{Teoria \(\mathcal{L}\)}
+
+            Tutte le f.b.f. contengono unicamente i connettivi \(\neg\) e \(\implies\).
+
+            Assiomi:
+            \begin{enumerate}
+                \item \(A \implies (B \implies A)\);
+                \item \((A \implies (B \implies C)) \implies ((A \implies B) \implies (A \implies C))\);
+                \item \((\neg \, A \implies \neg \, B) \implies ((\neg \, A \implies B) \implies A)\).
+            \end{enumerate}
+
+            Modus ponens: da \(A\) e \(A \implies B\) deduco \(B\).
+
+            Teorema di correttezza e completezza: siano \(\varphi, \, \psi \in \Gamma\) due f.b.f., allora
+            \begin{description}
+                \item[Correttezza] se \(\Gamma \vdash_\mathcal{L} \varphi\), allora \(\Gamma \models \varphi\);
+                \item[Completezza] se \(\Gamma \models \varphi\), allora \(\Gamma \vdash_\mathcal{L} \varphi\).
+            \end{description}
+
+            Teorema di deduzione sintattica: siano \(\varphi, \, \psi \in \Gamma\) due f.b.f., allora
+            \(\Gamma \cup {\psi} \vdash_\mathcal{L} \varphi\) sse \(\Gamma \vdash_\mathcal{L} \psi \implies \varphi\).
+
+        \subsection*{Calcolo per risoluzione}
+
+            Si basa su f.b.f. in forma normale congiuntiva. Ogni disgiunzione finita di letterali è detta clausola, dunque una
+            formula è una congiunzione di clausole.
+
+            Regola di risoluzione: date le clausole \(C_1\) e \(C_2\) ed un letterale \(A\), la regola di risoluzione si scrive come
+            \[
+                \infer{C_1 \cup C_2}{C_1 \cup \{A\} & C_2 \cup \{\neg \, A\}}.
+            \]
+
+            Teorema di correttezza e completezza per refutazione:
+            \begin{description}
+                \item[Correttezza] se \(\Gamma^C \vdash_\mathcal{R} \square\), allora \(\Gamma\) è insoddisfacibile;
+                \item[Completezza] se \(\Gamma\) è insoddisfacibile, allora \(\Gamma^C \vdash_\mathcal{R} \square\).
+            \end{description}
+
+            L'insieme delle clausole deducibili è definito come \(\mathrm{Ris}\left(\Gamma^C\right) = \Gamma^C \cup \left\{C_{i, \, j} \; | \; C_{i, \, j} \text{ è la risolvente di } C_i \text{ e } C_j\right\}\).
+
+            Algoritmo di risoluzione:
+            \begin{enumerate}
+                \item \(\Gamma \models \varphi\) sse \(\Gamma \cup \{\neg \, \varphi\}\) è insoddisfacibile;
+                \item \(\Gamma\) è insoddisfacibile sse \(\Gamma^C \cup {(\neg \, \varphi)}^C \vdash_\mathcal{R} \square\);
+                \item sia \(\Delta = \Gamma^C \cup {(\neg \, \varphi)}^C\), ripetere
+                    \begin{enumerate}
+                        \item \(\Delta' = \Delta\);
+                        \item \(\Delta = \mathrm{Ris}(\Delta)\);
+                    \end{enumerate}
+                    finché \(\square \notin \Delta\) o \(\Delta \neq \Delta'\);
+                \item se \(\square \in \Delta\) allora \(\Gamma \models \varphi\), altrimenti \(\Gamma \not\models \varphi\).
+            \end{enumerate}
+
+    \section*{Logica del primo ordine}
+
+        Alfabeto:
+        \begin{itemize}
+            \item costanti, indicate con le prime lettere latine minuscole;
+            \item variabili, indicate con le ultime lettere latine minuscole;
+            \item lettere funzionali, indicate con le lettere latine intermedie minuscole;
+            \item lettere predicative, indicate con le prime lettere latine maiuscole;
+            \item connettivi logici, equivalenti a quelli proposizionali;
+            \item quantificatori universale ed esistenziale;
+            \item parentesi tonde.
+        \end{itemize}
+
+        Si dice segnatura un qualunque insieme \(S\) di costanti, lettere funzionali e predicative. Si dice termine su \(S\) una
+        sequenza di costanti, variabili, lettere funzionali e parentesi, dove:
+        \begin{itemize}
+            \item ogni costante o variabile è un termine;
+            \item ogni lettera funzionale con i relativi parametri è un termine.
+        \end{itemize}
+        Una formula atomica è una formula composta da una lettera predicativa, avente termini come parametri.
+        Definizione di f.b.f.: \(\varphi \Coloneqq A \; | \; \neg \, \varphi \; | \; \forall \, x \, \varphi \; | \; \exists \, x \, \varphi \; | \; \varphi \land \varphi \; | \; \varphi \lor \varphi \; | \; \varphi \implies \varphi \; | \; \varphi \iff \varphi\).
+        Per l'insieme delle sottoformule, valgono le stesse regole della logica proposizionale, dove
+        \(\varphi = Q \, x \, \psi\) diventa \(S(\varphi) = \{\varphi\} \cup S(\psi)\).
+        Una variabile si dice legata se è quantificata, si dice libera altrimenti. Se in una formula non esistono variabili libere,
+        questa viene detta chiusa; in caso contrario è detta aperta. Una formula chiusa è detta chiusura universale od esistenziale se
+        presenta in testa solo quantificatori del rispettivo tipo. Si dice termine libero per una variabile un termine tale che detta
+        variabile non sia libera quando un'altra variabile del termine è legata.
+
+        \subsection*{Strutture interpretative}
+
+            Data una segnatura \(S\), si dice struttura interpretativa la coppia \(\left<D; \, I\right>\) dove
+            \begin{itemize}
+                \item \(D\) è un insieme non vuoto detto dominio;
+                \item \(I\) è una funzione di interpretazione, formata da tre funzioni \(I_1\), \(I_2\) e \(I_3\), dove
+                    \begin{itemize}
+                        \item \(I_1\) associa alle costanti in \(S\) valori in \(D\);
+                        \item \(I_2\) associa alle lettere funzionali in \(S\) operazioni in \(D\);
+                        \item \(I_3\) associa alle lettere predicative in \(S\) relazioni in \(D\).
+                    \end{itemize}
+            \end{itemize}
+
+            Si dice assegnamento la funzione \(s : VAR \to D\). Questa può essere estesa ai termini, diventando \(s^* : TER(S) \to D\).
+
+            Una formula chiusa può essere solo o vera o falsa, mai soddisfacibile ma non vera. La chiusura universale di una f.b.f. è
+            vera sse la formula è vera nella struttura interpretativa. La chiusura esistenziale è vera sse la formula è soddisfacibile.
+
+        \subsection*{Forma di normale prenessa e di Skolem}
+
+            Una formula si dice in forma normale prenessa se presenta tutti i quantificatori in testa alla formula. Regole di
+            normalizzazione:
+            \begin{enumerate}
+                \item \(\neg \, \forall \, x \, \psi \equiv \exists \, x \, \neg \, \psi\);
+                \item \(\forall \, x \, \psi \land \vartheta \equiv \forall \, y \left(\psi [y/x] \land \vartheta\right)\);
+                \item \(\forall \, x \, \psi \implies \vartheta \equiv \exists \, y \left(\psi [y/x] \implies \vartheta\right)\);
+                \item \(\vartheta \implies \forall \, x \, \psi \equiv \forall \, y \left(\vartheta \implies \psi [y/x]\right)\).
+            \end{enumerate}
+            È sempre possibile invertire \(\forall/\exists\) e \(\land/\lor\) in queste regole.
+            
+            Una formula si dice
+            in forma di Skolem se è prenessa e presenta solo quantificatori universali. Skolemizzazione:
+            \begin{enumerate}
+                \item si porta la formula in forma prenessa;
+                \item si elimina ogni esistenziale in testa, sostituendo le varibili con delle costanti;
+                \item si elimina ogni esistenziale successivo agli universali, sostituendo le varibili con lettere funzionali di
+                    arità pari al numero di universali che precedono, con le relative variabili come parametri.
+            \end{enumerate}
+
+            Una f.b.f. è insoddisfacibile sse una forma di Skolem della sua chiusura universale è insoddisfacibile.
+
+            Data una formula in forma di Skolem, è possibile risolverla mediante metodi equivalenti a quelli della logica
+            proposizionale, applicando opportune sostituzioni di variabili. 
+
+        \subsection*{Teoria \(\mathcal{K}\)}
+
+            Equivalente alla teoria \(\mathcal{L}\), con l'aggiunta di \(\forall\).
+
+            Assiomi aggiuntivi:
+            \begin{enumerate}
+                \item \(\forall \, x \, A \implies A \, [t/x]\);
+                \item \(\forall \, x \left(A \implies B\right) \implies \left(A \implies \forall \, x \, B\right)\).
+            \end{enumerate}
+            Oltre al modus ponens, esiste la generalizzazione: \(A\) diventa \(\forall \, x \, A\).
+
+    \section*{Strutture algebriche}
 
         \begin{description}
             
             \item[Semigruppo] Una struttura algebrica nella forma \((A, +)\), dove \(+\) è un'operazione associativa sull'insieme \(A\);
-            \item[Semigruppo commutativo] Un semigruppo con l'aggiunta della proprietà commutativa. 
+            \item[Semigruppo commutativo] Un semigruppo con l'aggiunta della proprietà commutativa;
             \item[Monoide] Un semigruppo con l'aggiunta di un'elemento neutro (scrittura: \((A, +, u)\));
             \item[Gruppo] Un monoide che presenta l'inverso per ogni elemento dell'insieme;
-            \item[Gruppo abeliano] Un gruppo che presenta la proprietà commutativa.
+            \item[Gruppo abeliano] Un gruppo che presenta la proprietà commutativa;
             \item[Anello] Una struttura nella forma \((A, +, *, u)\), dove
                 \begin{itemize}
                     \item \((A, +, u)\) forma un gruppo abeliano;
@@ -113,9 +471,56 @@
 
         \end{description}
 
-        %pr grp
-        %div 0 an
-        %canc an
-        %sotto
+        Note:
+        \begin{itemize}
+            \item in un gruppo, l'inverso di un elemento è sempre unico;
+            \item in un gruppo, vale la legge di cancellazione, ovvero \(a + b = b + c \equiv b = c\);
+            \item in un anello, \(a * u = u * a = u\);
+            \item in un anello, \(a * b = a * c \equiv b = c\) dove \(a \neq u\).
+        \end{itemize}
+
+        \subsection*{Sottostrutture e morfismi}
+
+            Criteri sottostrutture:
+            \begin{itemize}
+                \item per i sottogruppi, controllare se \(a + b\) e \(-a\) appartengono;
+                \item per i sottoanelli, controllare se \(a - b\) e \(a * b\) appartengono.
+            \end{itemize}
+
+            Per controllare se è presente un omomorfismo, dati \((A, \, +, \, u)\), \((\hat{A}, \, \hat{+}, \, \hat{u})\) e
+            \(f : A \to \hat{A}\), controllare se \(f(a + b) = f(a) \hat{+} f(b)\) e \(f(u) = \hat{u}\).
+
+    \section*{SPASS}
+
+            \begin{minipage}[h]{.4\textwidth}
+                Esempio:
+                \begin{verbatim}
+list_of_symbols.
+    functions[(f, 0), (g, 1)].
+    predicates[(A, 0), (B, 1)].
+end_of_list.
+
+list_of_formulae(axioms).
+    formula(...).
+end_of_list.
+
+list_of_formulae(conjectures).
+    formula(...).
+end_of_list.
+                \end{verbatim}
+            \end{minipage}
+            \begin{minipage}[h]{.6\textwidth}
+                Funzioni standard:
+                \begin{description}
+                    \item[\texttt{lnot(fbf)}] not logico;
+                    \item[\texttt{and(fbf, fbf [, fbf...])}] and logico;
+                    \item[\texttt{or(fbf, fbf [, fbf...])}] or logico;
+                    \item[\texttt{implies(fbf, fbf)}] implicazione;
+                    \item[\texttt{equiv(fbf, fbf)}] doppia implicazione;
+                    \item[\texttt{equal(fbf, fbf)}] uguaglianza;
+                    \item[\texttt{forall([var [, var...]], fbf)}] per ogni;
+                    \item[\texttt{exists([var [, var...]], fbf)}] esiste;.
+                \end{description}
+            \end{minipage}
 
 \end{document}
