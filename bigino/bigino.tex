@@ -97,7 +97,7 @@
 
         \begin{minipage}[h]{.4\textwidth}
             \begin{description}
-                \item[Serialità:] \(\forall \, a \in A, \, \exists \, a' \; | \; (a, \, a') \in R\);
+                \item[Serialità:] \(\forall \, a \in A, \, \exists \, a' \; | \; (a, \, a') \in R\),
                 \item[Riflessività:] \(\forall \, a \in A, \, (a, \, a) \in R\),
                 \item[Simmetria:] \(\forall \, (a, \, a') \in R, \, (a', \, a) \in R\),
             \end{description}
@@ -227,6 +227,8 @@
 
                 Si dice nucleo o kernel di una funzione la relazione \(\ker_f \subseteq A \times A\) tale che
                 \(\forall \, (a_1, \, a_2) \in \ker_f, \, f(a_1) = f(a_2)\).
+
+                Teorema di Cantor: ogni insieme ha cardinalità strettamente inferiore al suo insieme delle parti.
 
     \section*{Logica proposizionale}
 
@@ -381,6 +383,8 @@
             \item parentesi tonde.
         \end{itemize}
 
+        \newpage
+
         Si dice segnatura un qualunque insieme \(S\) di costanti, lettere funzionali e predicative. Si dice termine su \(S\) una
         sequenza di costanti, variabili, lettere funzionali e parentesi, dove:
         \begin{itemize}
@@ -484,7 +488,8 @@
             \item in un anello, \(a * u = u * a = u\);
             \item in un anello, \(a * b = a * c \equiv b = c\) dove \(a \neq u\);
             \item in un anello, si dice divisore dello zero un elemento \(a\) tale che esiste \(b\) per
-                cui \(ab = 0\), dove \(a \neq 0\), \(b \neq 0\).
+                cui \(ab = 0\), dove \(a \neq 0\), \(b \neq 0\);
+            \item teorema di Lagrange: dato un gruppo di ordine \(n\), ogni suo sottogruppo ha ordine che divide \(n\).
         \end{itemize}
 
         \subsection*{Sottostrutture e morfismi}
@@ -492,7 +497,7 @@
             Criteri sottostrutture:
             \begin{itemize}
                 %\item per i sottogruppi, controllare se \(a + b\) e \(-a\) appartengono;
-                \item per i sottogruppi, controllare se \(a - b\) appartiene;
+                \item per i sottogruppi, controllare se \(a - b\) appartiene (oppure \(a \cdot b^{-1}\));
                 \item per i sottoanelli, controllare se \(a - b\) e \(a * b\) appartengono.
             \end{itemize}
 
